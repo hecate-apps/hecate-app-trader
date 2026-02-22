@@ -1,0 +1,24 @@
+# Erlang/rebar3
+_build/
+_checkouts/
+_vendor/
+rebar.lock
+erl_crash.dump
+*.beam
+*.ez
+
+# Node/npm
+node_modules/
+.svelte-kit/
+build/
+dist/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo

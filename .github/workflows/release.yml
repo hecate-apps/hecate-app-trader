@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: '27'
+          rebar3-version: '3.24'
+
+      - name: Build traderd release tarball
+        working-directory: hecate-app-traderd
+        run: |
+          rebar3 as prod tar
+          mv _build/prod/rel/hecate_app_traderd/*.tar.gz ../hecate-app-traderd-linux-amd64.tar.gz
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: hecate-app-traderd-linux-amd64.tar.gz
+          generate_release_notes: true

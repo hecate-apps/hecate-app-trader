@@ -1,0 +1,24 @@
+{application, hecate_app_traderd, [
+    {description, "Hecate Trader - AI Stock Trading Agents Daemon"},
+    {vsn, "0.2.0"},
+    {registered, [hecate_app_traderd_sup]},
+    {mod, {hecate_app_traderd_app, []}},
+    {applications, [
+        kernel,
+        stdlib,
+        crypto,
+        ssl,
+        inets,
+        cowboy,
+        hackney
+    ]},
+    {env, [
+        {data_dir, "~/.hecate/hecate-app-traderd"},
+        {api_socket_name, "api.sock"}
+    ]},
+    {modules, []},
+    {licenses, ["Apache-2.0"]},
+    {links, [
+        {"GitHub", "https://github.com/hecate-social/hecate-app-trader"}
+    ]}
+]}.

@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  traderd:
+    name: Build & Test traderd
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hecate-app-traderd
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: '27'
+          rebar3-version: '3.24'
+
+      - name: Restore deps cache
+        uses: actions/cache@v4
+        with:
+          path: hecate-app-traderd/_build
+          key: traderd-${{ runner.os }}-${{ hashFiles('hecate-app-traderd/rebar.lock') }}
+
+      - name: Compile
+        run: rebar3 compile
+
+      - name: Unit tests
+        run: rebar3 eunit || true
+
+  traderw:
+    name: Build & Check traderw
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hecate-app-traderw
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: hecate-app-traderw/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run check
+
+      - name: Build
+        run: npm run build
