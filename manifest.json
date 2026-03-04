@@ -1,0 +1,23 @@
+{
+  "name": "trader",
+  "version": "0.2.0",
+  "icon": "\ud83d\udcc8",
+  "description": "AI-Enhanced Asset Trading",
+  "tag": "trader-studio",
+  "trust_level": "untrusted",
+  "permissions": [],
+  "repository": "https://github.com/hecate-apps/hecate-app-trader",
+  "license": "Apache-2.0",
+  "appstore": {
+    "plugin_name": "Trader",
+    "org": "hecate-apps",
+    "homepage": "https://github.com/hecate-apps/hecate-app-trader",
+    "tags": "trading,finance,ai,stocks,agents",
+    "license_type": "free",
+    "fee_cents": 0,
+    "fee_currency": "EUR",
+    "node_limit": 0,
+    "oci_image": "ghcr.io/hecate-apps/hecate-app-traderd",
+    "min_daemon_version": "0.14.0"
+  }
+}
